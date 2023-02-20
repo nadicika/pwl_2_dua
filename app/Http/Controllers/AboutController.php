@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
-    //
+    public function index()
+    {
+        echo "2141720012 / Inthania Nadicika Kurniawan";
+    }
 }
