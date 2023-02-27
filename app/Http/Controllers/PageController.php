@@ -17,9 +17,14 @@ class PageController extends Controller
     }
     */
 
-    public function about()
+    public function home()
     {
-        echo "2141720012 / Inthania Nadicika Kurniawan";
+        return view('home', ['name' => 'Hello, Selamat Datang Inthania Nadicika']);;
+    }
+
+    public function aboutus()
+    {
+        return view('about-us', ['aboutus' => 'Saya Inthania Nadicika Kurniawan seorang mahasiswa dari Politeknik Negeri Malang.']);
     }
 
     public function articles($id)
@@ -30,59 +35,59 @@ class PageController extends Controller
 
     public function product()
     {
-        echo "Halaman Products <br>";
-        echo "
+        return view('product', ['product' => 'List Product
+        <br>
         <ul>
             <li>
-                <a href='https://www.educastudio.com/category/marbel-edu-games'>Edu Games</a>
+                <a href="https://www.educastudio.com/category/marbel-edu-games">Edu Games</a>
             </li>
             <li>
-                <a href='https://www.educastudio.com/category/marbel-and-friends-kids-games'>Kids Games</a>
+                <a href="https://www.educastudio.com/category/marbel-and-friends-kids-games">Kids Games</a>
             </li>
             <li>
-                <a href='https://www.educastudio.com/category/riri-story-books'>Story Books</a>
+                <a href="https://www.educastudio.com/category/riri-story-books">Story Books</a>
             </li>
             <li>
-                <a href='https://www.educastudio.com/category/kolak-kids-songs'>Kids Song</a>
+                <a href="https://www.educastudio.com/category/kolak-kids-songs">Kids Song</a>
             </li>
-        </ul>";
+        </ul>']);
     }
 
-    public function news($param)
+    public function news()
     {
-        echo "Halaman News";
-        echo "<br>";
-        echo "
+        return view('news', ['news' => 'List News
+        <br>
         <ul>
             <li>
-                <a href='https://www.educastudio.com/news'>Berita 1</a>
+                <a href="https://www.educastudio.com/news">Berita 1</a>
             </li>
             <li>
-                <a href='https://www.educastudio.com/news/educa-studio-berbagi-untuk-warga-sekitar-terdampak-covid-19'>Berita 2</a>
+                <a href="https://www.educastudio.com/news/educa-studio-berbagi-untuk-warga-sekitar-terdampak-covid-19">Berita 2</a>
             </li>
-        </ul>";
+        </ul>']);
     }
 
     public function program()
     {
-        echo "Halaman Program <br>";
-        echo "
+        return view('program', ['program' => 'List Program
+        <br>
         <ul>
             <li>
-                <a href='https://www.educastudio.com/program/karir'>Program Karir</a>
+                <a href="https://www.educastudio.com/program/karir">Program Karir</a>
             </li>
             <li>
-            <a href='https://www.educastudio.com/program/magang'>Program Magang</a>
+            <a href="https://www.educastudio.com/program/magang">Program Magang</a>
             </li>
             <li>
-            <a href='https://www.educastudio.com/program/kunjungan-industri'>Program Kunjungan Industri</a>
+            <a href="https://www.educastudio.com/program/kunjungan-industri">Program Kunjungan Industri</a>
             </li>
-        </ul>";
+        </ul>']);
     }
 
     public function index()
     {
-        return 'KONTAK KAMI <br>
+        return view('contact-us', ['contact' => '
+        KONTAK KAMI <br>
         <ul>
             <li> Telp : 02182972 </li>
             <li> E-mail : edu-web@gmail.com </li>
@@ -90,7 +95,7 @@ class PageController extends Controller
         <label>Kontak</label> <br>
             <input placeholder="Masukkan kontak">
             <button>Submit</button>
-        ';
+        ']);
     }
 
 

@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KuliahController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,19 +38,31 @@ Route::get('//{id}', [ArticleController::class, 'index']);
 
 Route::get('/', [PageController::class, 'index']);
 
-Route::prefix('product')->group(function () {
-    Route::get('/list', [PageController::class, 'product']);
-});
+
 
 Route::get('/news/{param}', [PageController::class, 'news']);
 
 Route::prefix('program')->group(function () {
-    Route::get('/list', [PageController::class, 'program']);
-});
-
-Route::get('/about-us', function () {
-    echo "Saya Inthania Nadicika Kurniawan seorang mahasiswa dari Politeknik Negeri Malang. <br>
-    Saya berasal dari Jurusan Teknologi Informasi dengan Program Studi Teknik Informatika.";
+    Route::get('/', [PageController::class, 'program']);
 });
 
 Route::resource('index', PageController::class);
+
+//P3
+Route::get('/home', [PageController::class, 'home']);
+
+Route::prefix('product')->group(function () {
+    Route::get('/', [PageController::class, 'product']);
+});
+
+Route::get('/about-us', [PageController::class, 'aboutus']);
+
+Route::resource('contact-us', PageController::class)->only(['index']);
+
+Route::get('/prak2', function(){
+    return view('layout.template');
+});
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/profile', [ProfileController::class, 'index']);
+Route::get('/kuliah', [KuliahController::class, 'index']);
