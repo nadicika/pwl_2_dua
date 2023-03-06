@@ -10,5 +10,6 @@ class KendaraanModel extends Model
     use HasFactory;
 
     protected $table = 'kendaraan';
-    protected $primaryKey = 'nim';
+    protected $primaryKey = 'nopol';
+    protected $keyType = 'string';
 }
