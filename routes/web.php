@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HobiController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\KuliahController;
@@ -69,3 +70,5 @@ Route::get('/profile', [ProfileController::class, 'index']);
 Route::get('/kuliah', [KuliahController::class, 'index']);
 
 Route::get('/kendaraan', [KendaraanController::class, 'index']);
+
+Route::get('/hobi', [HobiController::class, 'index']);
