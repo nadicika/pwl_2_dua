@@ -20,8 +20,11 @@ class DatabaseSeeder extends Seeder
             KendaraanSeeder::class
         ]);*/
 
-        $this->call([
+        /*$this->call([
             HobiSeeder::class
+        ]);*/
+        $this->call([
+            KeluargaSeeder::class
         ]);
     }
 }

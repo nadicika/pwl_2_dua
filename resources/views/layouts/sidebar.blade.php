@@ -53,8 +53,15 @@
         </li>
         <li class="nav-item">
           <a href="{{url('/hobi')}}" class="nav-link">
-            <i class="nav-icon fas fa-tree"></i>
+            <i class="nav-icon fas fa-chart-pie"></i>
               Hobi
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{url('/keluarga')}}" class="nav-link">
+            <i class="nav-icon fas fa-tree"></i>
+              Keluarga
             </p>
           </a>
         </li>
