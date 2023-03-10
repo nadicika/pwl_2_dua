@@ -23,8 +23,11 @@ class DatabaseSeeder extends Seeder
         /*$this->call([
             HobiSeeder::class
         ]);*/
-        $this->call([
+        /*$this->call([
             KeluargaSeeder::class
+        ]);*/
+        $this->call([
+            MatkulSeeder::class
         ]);
     }
 }
