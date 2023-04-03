@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeluargaController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\KuliahController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
@@ -55,7 +56,11 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/hobi', [HobiController::class, 'index']);
     Route::get('/keluarga', [KeluargaController::class, 'index']);
     Route::get('/matkul', [MatkulController::class, 'index']);
+
+    Route::resource('/mahasiswa', MahasiswaController::class)->parameter('mahasiswas', 'id');
 });
+
+
 
 Route::get('/', [PageController::class, 'index']);
 
@@ -78,11 +83,13 @@ Route::get('/', [PageController::class, 'index']);
     
     Route::get('/about-us', [PageController::class, 'aboutus']);
     
-    Route::resource('contact-us', PageController::class)->only(['index']);
+    //Route::resource('contact-us', PageController::class)->only(['index']);
     
     Route::get('/prak2', function(){
         return view('layout.template');
     });
+
+
 
 
 

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
+        /*
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
@@ -27,8 +27,10 @@ class LoginController extends Controller
      *
      * @var string
      */
+
     protected $redirectTo = '/dashboard';
-    /**
+    
+        /**
      * Create a new controller instance.
      *
      * @return void
@@ -38,6 +40,7 @@ class LoginController extends Controller
     {
         return view('layouts.login');
     }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -52,7 +55,8 @@ class LoginController extends Controller
     {
         $request->validate([
             $this->username() => 'required|string',
-            'password' => 'required|string|',
+            'password' => 'required|string',
         ]);
     }
+
 }
