@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswas;
 use App\Models\MahasiswaModel;
 use Illuminate\Http\Request;
+use App\Models\KelasModel;
 
 class MahasiswaController extends Controller
 {
@@ -15,7 +16,7 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mhs = MahasiswaModel::all();
+        $mhs = MahasiswaModel::with('kelas')->get();
         return view('mahasiswa.mahasiswa')
                     ->with('mhs', $mhs);
     }
@@ -27,8 +28,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create_mahasiswa')
-                ->with('url_form', url('/mahasiswa'));
+        $kelas = KelasModel::all();
+        return view('mahasiswa.create_mahasiswa',['kelas'=>$kelas]) ->with('url_form',url('/mahasiswa'));
     }
 
     /**
@@ -47,12 +48,16 @@ class MahasiswaController extends Controller
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string',
             'hp' => 'required|digits_between:6,15',
+            'kelas_id'=>'required'
         ]);
 
-        $data = MahasiswaModel::create($request->except(['_token']));
+        MahasiswaModel::insert($request->except(['_token']));
+
+        //$data = MahasiswaModel::create($request->except(['_token']));
+
         return redirect('mahasiswa')
             ->with('success', 'Mahasiswa Berhasil Ditambahkan');
-
+            
     }
 
     /**
@@ -61,10 +66,12 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(MahasiswaModel $mahasiswas)
+    public function show($id)
     {
-        //
+        $mahasiswa = MahasiswaModel::where('id',$id)->get();
+        return view('detail', ['Mahasiswa' => $mahasiswa[0]]);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -74,9 +81,11 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        $mahasiswa = MahasiswaModel::find($id);
+        $mahasiswa = MahasiswaModel::with('kelas')->where('id', $id)->first();
+        $kelas = KelasModel::all();
         return view('mahasiswa.create_mahasiswa')
                 ->with('mhs', $mahasiswa)
+                ->with('kelas', $kelas)
                 ->with('url_form', url('/mahasiswa/' . $id));
     }
 

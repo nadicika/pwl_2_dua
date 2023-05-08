@@ -17,6 +17,7 @@
                   <th>Nama</th>
                   <th>Jenis Kelamin</th>
                   <th>No HP</th>
+                  <th>Kelas</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -29,7 +30,9 @@
                       <td>{{$k->nama}}</td>
                       <td>{{$k->jk}}</td>
                       <td>{{$k->hp}}</td>
+                      <td>{{$k->kelas->nama_kelas}}</td>
                       <td>
+                        <a href="{{url('/mahasiswa/'. $k->id)}}" class="btn btn-sm btn-info">Show</a>
                         <a href="{{url('/mahasiswa/'. $k->id.'/edit')}}" class="btn btn-sm btn-warning">Edit</a>
 
                         <form method="POST" action="{{url('/mahasiswa/'.$k->id)}}">
@@ -42,7 +45,7 @@
                   @endforeach
                 @else
                   <tr>
-                    <td colspan="6" class="text-center">Data tidak ada</td>
+                    <td colspan="7" class="text-center">Data tidak ada</td>
                   </tr>
                 @endif
               </tbody>

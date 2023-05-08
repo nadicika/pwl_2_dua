@@ -63,9 +63,17 @@
                 <span class="error invalid-feedback">{{ $message }} </span>
               @enderror
             </div>
-
-
-
+            <div class="form-group">
+              <label for="Kelas">Kelas</label>
+              <select name="kelas_id" class="form-control @error('kelas_id') is-invalid @enderror">
+                @foreach($kelas as $kls)
+                <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>
+                @endforeach
+              </select>
+              @error('kelas_id')
+                <span class="error invalid-feedback">{{ $message }} </span>
+              @enderror
+            </div>
             <div class="form-group">
               <button class="btn btn-sm btn-primary">Simpan</button>
             </div>
