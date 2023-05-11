@@ -66,7 +66,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{url('/matkul')}}" class="nav-link">
+          <a href="{{url('/matakuliah')}}" class="nav-link">
             <i class="nav-icon fas fa-table"></i>
               Mata Kuliah
             </p>

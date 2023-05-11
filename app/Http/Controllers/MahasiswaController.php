@@ -6,6 +6,7 @@ use App\Models\Mahasiswas;
 use App\Models\MahasiswaModel;
 use Illuminate\Http\Request;
 use App\Models\KelasModel;
+use App\Models\NilaiKhsModel;
 
 class MahasiswaController extends Controller
 {
@@ -29,7 +30,8 @@ class MahasiswaController extends Controller
     public function create()
     {
         $kelas = KelasModel::all();
-        return view('mahasiswa.create_mahasiswa',['kelas'=>$kelas]) ->with('url_form',url('/mahasiswa'));
+        return view('mahasiswa.create_mahasiswa',['kelas'=>$kelas]) 
+                ->with('url_form',url('/mahasiswa'));
     }
 
     /**
@@ -68,8 +70,12 @@ class MahasiswaController extends Controller
      */
     public function show($id)
     {
-        $mahasiswa = MahasiswaModel::where('id',$id)->get();
-        return view('detail', ['Mahasiswa' => $mahasiswa[0]]);
+        //$mahasiswa = MahasiswaModel::where('id',$id)->get();
+        //return view('detail', ['Mahasiswa' => $mahasiswa[0]]);
+
+        $mhs = MahasiswaModel::find($id);
+        return view('detail')
+            ->with('mhs', $mhs);
     }
     
 

@@ -10,9 +10,11 @@ use App\Http\Controllers\KeluargaController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\KuliahController;
 use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\MatkulController;
+use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Models\MahasiswaModel;
+use App\Models\NilaiKhsModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -55,9 +57,18 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/kendaraan', [KendaraanController::class, 'index']);
     Route::get('/hobi', [HobiController::class, 'index']);
     Route::get('/keluarga', [KeluargaController::class, 'index']);
-    Route::get('/matkul', [MatkulController::class, 'index']);
+    Route::get('/matakuliah', [MatakuliahController::class, 'index']);
+    Route::get('/mahasiswa/khs/{id}', function($id){
+        $mhs = MahasiswaModel::find($id);
+
+        $khs = NilaiKhsModel::where('mhs_id',$id)->get();
+        return view('khs')
+            ->with('mahasiswa', $mhs)
+            ->with('khs', $khs); 
+    });
 
     Route::resource('/mahasiswa', MahasiswaController::class)->parameter('mahasiswas', 'id');
+    Route::resource('/matakuliah', MatakuliahController::class)->parameter('matakuliah', 'id');
 });
 
 

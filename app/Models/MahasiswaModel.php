@@ -24,4 +24,9 @@ class MahasiswaModel extends Model
     public function kelas() {
         return $this->belongsTo(KelasModel::class);
     }
+
+    public function nilai_khs(){
+        return $this->belongsTo(NilaiKhsModel::class);
+    }
+
 }

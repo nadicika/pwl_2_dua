@@ -32,14 +32,16 @@
                       <td>{{$k->hp}}</td>
                       <td>{{$k->kelas->nama_kelas}}</td>
                       <td>
-                        <a href="{{url('/mahasiswa/'. $k->id)}}" class="btn btn-sm btn-info">Show</a>
-                        <a href="{{url('/mahasiswa/'. $k->id.'/edit')}}" class="btn btn-sm btn-warning">Edit</a>
+                        <div class="">
+                          <a href="{{url('/mahasiswa/'. $k->id)}}" class="btn btn-sm btn-info">Show</a>
+                          <a href="{{url('/mahasiswa/'. $k->id.'/edit')}}" class="btn btn-sm btn-warning">Edit</a>
 
-                        <form method="POST" action="{{url('/mahasiswa/'.$k->id)}}">
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                        </form>
+                          <form method="POST" action="{{ url('/mahasiswa/'.$k->id ) }}" class="d-inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</button>
+                          </form>
+                          <a href="{{ url('mahasiswa/khs/'.$k->id) }}" class="btn btn-sm btn-primary">Nilai</a>
                       </td>
                     </tr>
                   @endforeach
