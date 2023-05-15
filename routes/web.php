@@ -67,9 +67,12 @@ Route::middleware(['auth'])->group(function() {
             ->with('khs', $khs); 
     });
 
+    Route::resource('/articles', ArticleController::class);
+
     Route::resource('/mahasiswa', MahasiswaController::class)->parameter('mahasiswas', 'id');
     Route::resource('/matakuliah', MatakuliahController::class)->parameter('matakuliah', 'id');
 });
+
 
 
 
