@@ -15,6 +15,7 @@
                   <th>No</th>
                   <th>Nim</th>
                   <th>Nama</th>
+                  <th>Foto</th>
                   <th>Jenis Kelamin</th>
                   <th>No HP</th>
                   <th>Kelas</th>
@@ -28,6 +29,10 @@
                       <td>{{++$i}}</td>
                       <td>{{$k->nim}}</td>
                       <td>{{$k->nama}}</td>
+                      <td>
+                        <img src="{{asset('storage/'.$k->foto)}}" alt=""
+                        width="50px" height="70px">
+                      </td>
                       <td>{{$k->jk}}</td>
                       <td>{{$k->hp}}</td>
                       <td>{{$k->kelas->nama_kelas}}</td>
