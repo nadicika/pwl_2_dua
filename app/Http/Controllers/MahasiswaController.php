@@ -7,6 +7,7 @@ use App\Models\MahasiswaModel;
 use Illuminate\Http\Request;
 use App\Models\KelasModel;
 use App\Models\NilaiKhsModel;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
@@ -159,5 +160,12 @@ class MahasiswaController extends Controller
         MahasiswaModel::where('id', '=', $id)->delete();
         return redirect('mahasiswa')
             ->with('succes', 'Mahasiswa Berhasil Dihapus');
+    }
+
+    public function cetak_pdf($id){
+        $mhs = MahasiswaModel::find($id);
+        $khs = NilaiKhsModel::where('mhs_id', $id)->get();
+        $pdf = PDF::loadView('mahasiswa.cetak_pdf', ['mhs' => $mhs, 'khs' => $khs]);
+        return $pdf->stream();
     }
 }
