@@ -8,7 +8,7 @@
             <h3 class="card-title">Daftar Mahasiswa</h3>
           </div>
           <div class="card-body">
-            <button class="btn btn-sm btn-success my-2" data-toggle="modal" data-target="#modal_mahasiswa">Tambah Data</button>
+            <button class="btn btn-sm btn-success my-2" onclick="tambahData()" data-toggle="modal" data-target="#modal_mahasiswa">Tambah Data</button>
             <table class="table table-bordered table-striped" id="data_mahasiswa">
               <thead>
                 <tr>
@@ -156,6 +156,15 @@
 
 @push('js')
 <script>
+  function tambahData() {
+        $('#modal_mahasiswa').modal('show');
+        $('#modal_mahasiswa .modal-title').html('Tambah Data Mahasiswa');
+        $('#modal_mahasiswa #nim').val('');
+        $('#modal_mahasiswa #nama').val('');
+        $('#modal_mahasiswa #jk').val('');
+        $('#modal_mahasiswa #hp').val('');
+    }
+
   function updateData(th){
       $('#modal_mahasiswa').modal('show');
       $('#modal_mahasiswa .modal-title').html('Edit Data Mahasiswa');
@@ -211,7 +220,6 @@
             }
         });
     }
-
 
   $(document).ready(function (){
       var dataMahasiswa = $('#data_mahasiswa').DataTable({
