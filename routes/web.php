@@ -74,6 +74,7 @@ Route::middleware(['auth'])->group(function() {
 
     Route::resource('/mahasiswa', MahasiswaController::class)->parameter('mahasiswas', 'id');
     Route::post('/mahasiswa/data', [MahasiswaController::class , 'data']);
+    Route::post('/mahasiswa/delete/{id}', [MahasiswaController::class, 'destroy']);
     Route::resource('/matakuliah', MatakuliahController::class)->parameter('matakuliah', 'id');
 });
 
