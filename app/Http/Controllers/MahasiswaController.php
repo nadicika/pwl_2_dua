@@ -9,6 +9,8 @@ use App\Models\KelasModel;
 use App\Models\NilaiKhsModel;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class MahasiswaController extends Controller
 {
@@ -19,9 +21,16 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mhs = MahasiswaModel::with('kelas')->get();
-        return view('mahasiswa.mahasiswa')
-                    ->with('mhs', $mhs);
+        return view('mahasiswa.mahasiswa');
+    }
+
+    public function data()
+    {
+        $data = MahasiswaModel::selectRaw('id, nim, nama, jk, hp');
+
+        return DataTables::of($data)
+                    ->addIndexColumn()
+                    ->make(true);
     }
 
     /**
@@ -42,7 +51,37 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+     public function store(Request $request)
+     {
+         $rule = [
+             'nim' => 'required|string|max:10|unique:mahasiswas,nim',
+             'nama' => 'required|string|max:50',
+             'hp' => 'required|digits_between:6,15',
+             'jk' => 'required|in:L,P',
+         ];
+ 
+         $validator = Validator::make($request->all(), $rule);
+         if($validator->fails()){
+             return response()->json([
+                 'status' => false,
+                 'modal_close' => false,
+                 'message' => 'Data gagal ditambahkan. ' .$validator->errors()->first(),
+                 'data' => $validator->errors()
+             ]);
+         }
+ 
+         $mhs = MahasiswaModel::create($request->all());
+         return response()->json([
+             'status' => ($mhs),
+             'modal_close' => false,
+             'message' => ($mhs)? 'Data berhasil ditambahkan' : 'Data gagal ditambahkan',
+             'data' => null
+         ]);
+     }
+
+
+    public function storeOld(Request $request)
     {
         $request->validate([
             'nim' => 'required|string|max:10|unique:mahasiswas,nim',
@@ -116,7 +155,37 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+     public function update(Request $request, $id)
+     {
+         $rule = [
+             'nim' => 'required|string|max:10|unique:mahasiswa,nim,'.$id,
+             'nama' => 'required|string|max:50',
+             'jk' => 'required|in:L,P',
+             'hp' => 'required|digits_between:6,15',
+         ];
+ 
+         $validator = Validator::make($request->all(), $rule);
+         if($validator->fails()){
+             return response()->json([
+                 'status' => false,
+                 'modal_close' => false,
+                 'message' => 'Data gagal diedit. ' .$validator->errors()->first(),
+                 'data' => $validator->errors()
+             ]);
+         }
+ 
+         $mhs = MahasiswaModel::where('id', $id)->update($request->except('_token', '_method'));
+ 
+         return response()->json([
+             'status' => ($mhs),
+             'modal_close' => $mhs,
+             'message' => ($mhs)? 'Data berhasil diedit' : 'Data gagal diedit',
+             'data' => null
+         ]);
+     } 
+
+    public function updateOld(Request $request, $id)
     {
         $request->validate([
             'nim' => 'required|string|max:10|unique:mahasiswas,nim,'.$id,

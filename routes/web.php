@@ -66,12 +66,14 @@ Route::middleware(['auth'])->group(function() {
             ->with('mahasiswa', $mhs)
             ->with('khs', $khs); 
     });
+
     Route::get('/mahasiswa/cetak_khs/{id}', [MahasiswaController::class, 'cetak_pdf']);
 
     Route::resource('/articles', ArticleController::class);
     Route::get('/article/cetak_pdf', [ArticleController::class, 'cetak_pdf']);
 
     Route::resource('/mahasiswa', MahasiswaController::class)->parameter('mahasiswas', 'id');
+    Route::post('/mahasiswa/data', [MahasiswaController::class , 'data']);
     Route::resource('/matakuliah', MatakuliahController::class)->parameter('matakuliah', 'id');
 });
 
